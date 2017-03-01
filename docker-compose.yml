@@ -16,7 +16,9 @@ services:
       - "80:80"
     volumes:
       - './certdata:/etc/external/'
-    env_file: bespin-web.env
+    env_file:
+      - bespin-web.env
+      - bespin-database.env # Since the web app needs database credentials
     networks:
       - bespin-web
 volumes:

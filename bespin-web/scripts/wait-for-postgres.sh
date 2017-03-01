@@ -5,9 +5,9 @@
 set -e
 
 # Set environment variables for psql to read
-export PGDATABASE=$BESPIN_DB_NAME
-export PGPASSWORD=$BESPIN_DB_PASSWORD
-export PGUSER=$BESPIN_DB_USER
+export PGDATABASE=$POSTGRES_DB
+export PGPASSWORD=$POSTGRES_PASSWORD
+export PGUSER=$POSTGRES_USER
 export PGHOST=$BESPIN_DB_HOST
 cmd="$@"
 
@@ -17,4 +17,10 @@ until psql -c '\l'; do
 done
 
 >&2 echo "Postgres is up - executing command"
+
+# Now set environment variables for django to read
+export BESPIN_DB_NAME=$POSTGRES_DB
+export BESPIN_DB_USER=$POSTGRES_USER
+export BESPIN_DB_PASSWORD=$POSTGRES_PASSWORD
+
 exec $cmd

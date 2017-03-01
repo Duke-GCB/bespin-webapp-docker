@@ -8,4 +8,6 @@ python manage.py migrate
 #   /usr/local/bin/python manage.py loaddata /etc/external/fixtures.json
 # fi
 
+# Update the variable names
+
 apachectl -DFOREGROUND
