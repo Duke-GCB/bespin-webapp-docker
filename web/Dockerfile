@@ -27,9 +27,7 @@ ENV BESPIN_UI_ROOT /srv/ui
 RUN mkdir ${BESPIN_UI_ROOT}
 RUN curl -SL https://github.com/Duke-GCB/bespin-ui/releases/download/0.1.0/bespin-ui.tar.gz | tar -xzC $BESPIN_UI_ROOT
 
-
-COPY start-apache.sh /scripts/
-COPY wait-for-postgres.sh /scripts/
+COPY scripts /scripts
 
 # set the command to start apache
 
