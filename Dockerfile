@@ -3,7 +3,8 @@ MAINTAINER dan.leehr@duke.edu
 
 RUN apt-get update && apt-get install -y \
   apache2 \
-  libapache2-mod-wsgi
+  libapache2-mod-wsgi \
+  vim
 
 ENV DJANGO_SETTINGS_MODULE bespin.settings_prod
 ENV BESPIN_STATIC_ROOT /srv/static
@@ -20,6 +21,7 @@ RUN BESPIN_SECRET_KEY=DUMMY python manage.py collectstatic --noinput
 
 COPY bespin-web.conf /etc/apache2/sites-available/
 RUN a2ensite bespin-web
+RUN a2enmod rewrite
 
 # Install the bespin UI app somewhere
 ENV BESPIN_UI_ROOT /srv/ui
