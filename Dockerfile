@@ -21,6 +21,7 @@ RUN BESPIN_SECRET_KEY=DUMMY python manage.py collectstatic --noinput
 
 COPY bespin-web.conf /etc/apache2/sites-available/
 RUN a2ensite bespin-web
+RUN a2dissite 000-default
 RUN a2enmod rewrite
 
 # Install the bespin UI app somewhere
