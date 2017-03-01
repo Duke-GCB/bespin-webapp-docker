@@ -1,0 +1,25 @@
+version: '3'
+services:
+  bespin-database:
+    image: postgres:9.5
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    # Setting vars in the database env file causes the postgres image to createdb and createrole
+    env_file: bespin-database.env
+    networks:
+      - bespin-web
+  bespin-web:
+    depends_on:
+      - bespin-database
+    image: quay.io/dukegcb/bespin-web
+    ports:
+      - "80:80"
+    volumes:
+      - './certdata:/etc/external/'
+    env_file: bespin-web.env
+    networks:
+      - bespin-web
+volumes:
+  db-data:
+networks:
+  bespin-web:
