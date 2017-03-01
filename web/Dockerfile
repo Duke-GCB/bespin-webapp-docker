@@ -29,6 +29,8 @@ RUN curl -SL https://github.com/Duke-GCB/bespin-ui/releases/download/0.1.0/bespi
 
 
 COPY start-apache.sh /scripts/
+COPY wait-for-postgres.sh /scripts/
+
 # set the command to start apache
 
 EXPOSE 80
@@ -36,4 +38,5 @@ EXPOSE 80
 # Add /scripts to the PATH
 ENV PATH ${PATH}:/scripts/
 
+ENTRYPOINT ["/scripts/wait-for-postgres.sh"]
 CMD ["/scripts/start-apache.sh"]
