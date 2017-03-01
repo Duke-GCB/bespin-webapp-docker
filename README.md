@@ -1,5 +1,5 @@
-bespin-web
-==========
+bespin-webapp-docker
+====================
 
 Dockerfile and docker-compose script for running bespin-api and bespin-ui
 
