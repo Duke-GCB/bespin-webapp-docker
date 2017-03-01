@@ -22,6 +22,10 @@ COPY bespin-web.conf /etc/apache2/sites-available/
 RUN a2ensite bespin-web
 
 # Install the bespin UI app somewhere
+ENV BESPIN_UI_ROOT /srv/ui
+RUN mkdir ${BESPIN_UI_ROOT}
+RUN curl -SL https://github.com/Duke-GCB/bespin-ui/releases/download/0.1.0/bespin-ui.tar.gz | tar -xzC $BESPIN_UI_ROOT
+
 
 COPY start-apache.sh /scripts/
 # set the command to start apache
