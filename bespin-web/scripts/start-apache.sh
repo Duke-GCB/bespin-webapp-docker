@@ -4,6 +4,7 @@
 python manage.py migrate
 
 create-lando-user.sh
+create-lando-connection.sh
 load-sample-data.sh
 
 # Apache gets grumpy about PID files pre-existing
