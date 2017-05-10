@@ -39,5 +39,5 @@ EXPOSE 443
 # Add /scripts to the PATH
 ENV PATH ${PATH}:/scripts/
 
-#ENTRYPOINT ["/scripts/wait-for-postgres.sh"]
-CMD "bash" # ["/scripts/start-apache.sh"]
+ENTRYPOINT ["/scripts/wait-for-postgres.sh"]
+CMD ["/scripts/start-apache.sh"]
