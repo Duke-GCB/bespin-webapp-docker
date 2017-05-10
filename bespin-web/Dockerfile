@@ -1,6 +1,8 @@
-ARG BESPIN_UI_VERSION=master
-
 FROM danlynn/ember-cli:2.13.1 as builder
+ARG BESPIN_UI_VERSION
+ARG BESPIN_JOB_WATCHER_URL
+ENV BESPIN_UI_VERSION ${BESPIN_UI_VERSION:-master}
+ENV JOB_WATCHER_URL=${BESPIN_JOB_WATCHER_URL:-wss://bespin-ws-dev.gcb.duke.edu}
 WORKDIR /src
 RUN useradd -m ember
 RUN chown -R ember /src
@@ -10,7 +12,6 @@ WORKDIR /src/bespin-ui
 RUN git checkout $BESPIN_UI_VERSION
 RUN npm install
 RUN bower install
-ENV JOB_WATCHER_URL wss://bespin-ws-dev.gcb.duke.edu
 RUN ember build --environment production
 
 FROM quay.io/dukegcb/bespin-api
