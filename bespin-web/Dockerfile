@@ -21,9 +21,10 @@ COPY bespin-web.conf /etc/apache2/sites-available/
 RUN a2ensite bespin-web
 RUN a2dissite 000-default
 RUN a2enmod rewrite
+RUN a2enmod ssl
 
 # Install the bespin UI app somewhere
-ENV BESPIN_UI_VERSION 0.1.2
+ENV BESPIN_UI_VERSION 0.1.3
 ENV BESPIN_UI_ROOT /srv/ui
 RUN mkdir ${BESPIN_UI_ROOT}
 RUN curl -SL https://github.com/Duke-GCB/bespin-ui/releases/download/${BESPIN_UI_VERSION}/bespin-ui.tar.gz | tar -xzC $BESPIN_UI_ROOT
@@ -33,9 +34,10 @@ COPY scripts /scripts
 # set the command to start apache
 
 EXPOSE 80
+EXPOSE 443
 
 # Add /scripts to the PATH
 ENV PATH ${PATH}:/scripts/
 
-ENTRYPOINT ["/scripts/wait-for-postgres.sh"]
-CMD ["/scripts/start-apache.sh"]
+#ENTRYPOINT ["/scripts/wait-for-postgres.sh"]
+CMD "bash" # ["/scripts/start-apache.sh"]

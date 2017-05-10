@@ -5,7 +5,13 @@ python manage.py migrate
 
 create-lando-user.sh
 create-lando-connection.sh
-load-sample-data.sh
+LOADEDSAMPLEDATA=/var/run/bespin-load.txt
+if [ ! -f $LOADEDSAMPLEDATA ]
+then
+   load-sample-data.sh
+   date > $LOADEDSAMPLEDATA
+fi
+
 
 # Apache gets grumpy about PID files pre-existing
 rm -f /var/run/apache2/apache2.pid
