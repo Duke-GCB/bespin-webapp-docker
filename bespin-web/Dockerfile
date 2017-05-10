@@ -1,3 +1,18 @@
+ARG BESPIN_UI_VERSION=master
+
+FROM danlynn/ember-cli:2.13.1 as builder
+WORKDIR /src
+RUN useradd -m ember
+RUN chown -R ember /src
+USER ember
+RUN git clone https://github.com/Duke-GCB/bespin-ui.git
+WORKDIR /src/bespin-ui
+RUN git checkout $BESPIN_UI_VERSION
+RUN npm install
+RUN bower install
+ENV JOB_WATCHER_URL wss://bespin-ws-dev.gcb.duke.edu
+RUN ember build --environment production
+
 FROM quay.io/dukegcb/bespin-api
 MAINTAINER dan.leehr@duke.edu
 
@@ -25,7 +40,7 @@ RUN a2enmod rewrite
 # Install the bespin UI app somewhere
 ENV BESPIN_UI_ROOT /srv/ui
 RUN mkdir ${BESPIN_UI_ROOT}
-RUN curl -SL https://github.com/Duke-GCB/bespin-ui/releases/download/0.1.0/bespin-ui.tar.gz | tar -xzC $BESPIN_UI_ROOT
+COPY --from=builder /src/bespin-ui/dist $BESPIN_UI_ROOT
 
 COPY scripts /scripts
 
