@@ -24,7 +24,7 @@ RUN a2enmod rewrite
 RUN a2enmod ssl
 
 # Install the bespin UI app somewhere
-ENV BESPIN_UI_VERSION 0.1.4
+ENV BESPIN_UI_VERSION 0.1.6
 ENV BESPIN_UI_ROOT /srv/ui
 RUN mkdir ${BESPIN_UI_ROOT}
 RUN curl -SL https://github.com/Duke-GCB/bespin-ui/releases/download/${BESPIN_UI_VERSION}/bespin-ui.tar.gz | tar -xzC $BESPIN_UI_ROOT
