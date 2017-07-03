@@ -1,4 +1,4 @@
-FROM quay.io/dukegcb/bespin-api
+FROM dukegcb/bespin-api
 MAINTAINER dan.leehr@duke.edu
 
 RUN apt-get update && apt-get install -y \
