@@ -29,6 +29,7 @@ COPY scripts /scripts
 # Install the bespin UI app somewhere
 ENV BESPIN_UI_ROOT /srv/ui
 RUN mkdir ${BESPIN_UI_ROOT}
+RUN echo "Downloading bespin-ui from $(/scripts/get-bespin-ui-url.py)"
 RUN curl -SL `/scripts/get-bespin-ui-url.py` | tar -xzC $BESPIN_UI_ROOT
 
 # set the command to start apache
