@@ -23,16 +23,12 @@ RUN a2dissite 000-default
 RUN a2enmod rewrite
 RUN a2enmod ssl
 
-# Setup scripts (including get-bespin-ui-url.py)
 COPY scripts /scripts
 
-# Install the bespin UI app somewhere
-ENV BESPIN_UI_ROOT /srv/ui
-RUN mkdir ${BESPIN_UI_ROOT}
-RUN echo "Downloading bespin-ui from $(/scripts/get-bespin-ui-url.py)"
-RUN curl -SL `/scripts/get-bespin-ui-url.py` | tar -xzC $BESPIN_UI_ROOT
+# Mark /srv/ui as a volume
 
-# set the command to start apache
+VOLUME /srv/ui
+COPY index.html /srv/ui/index.html
 
 EXPOSE 80
 EXPOSE 443
@@ -40,5 +36,6 @@ EXPOSE 443
 # Add /scripts to the PATH
 ENV PATH ${PATH}:/scripts/
 
+# set the command to start apache
 ENTRYPOINT ["/scripts/wait-for-postgres.sh"]
 CMD ["/scripts/start-apache.sh"]

@@ -11,7 +11,7 @@ services:
   bespin-web:
     depends_on:
       - bespin-database
-    image: quay.io/dukegcb/bespin-web
+    image: dukegcb/bespin-web
     ports:
       - "80:80"
       - "443:443"
@@ -20,6 +20,7 @@ services:
       - bespin-database.env # Since the web app needs database credentials
     volumes:
       - ./certs:/etc/external/ssl
+      # - TODO: Add a volume for the bespin-ui
     networks:
       - bespin-web
 volumes:
