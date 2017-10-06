@@ -1,16 +1,17 @@
 bespin-webapp-docker
 ====================
 
-Dockerfile and docker-compose script for running bespin-api and bespin-ui
+Dockerfile and docker-compose script for running bespin-api with bespin-ui
 
 # Usage
 
-The Dockerfile contained in web is used to build an image containing the Django (backend) and Ember (frontend) applications, hosted by a single Apache httpd server.
+The Dockerfile contained in web is used to build an image containing the Django (backend), hosted by Apache httpd.
+The Ember frontend application is not included in the image, but should be downloaded from its release and mounted at `/srv/ui/`
 
 It also includes a docker-compose file that can deploy the image and its backing Postgres database
 
 1. Create files `bespin-database.env` and `bespin-web.env`, based on the `.sample` files.
-2. Create self signed certificates: 
+2. Create self signed certificates:
 ```
 mkdir certs
 cd certs
