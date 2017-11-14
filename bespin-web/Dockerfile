@@ -1,4 +1,5 @@
-FROM dukegcb/bespin-api
+ARG BESPIN_API_VERSION=latest
+FROM dleehr/bespin-api-versioned:$BESPIN_API_VERSION
 MAINTAINER dan.leehr@duke.edu
 
 RUN apt-get update && apt-get install -y \
