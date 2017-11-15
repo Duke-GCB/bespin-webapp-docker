@@ -1,7 +1,9 @@
 bespin-webapp-docker
 ====================
 
-Dockerfile and docker-compose script for running bespin-api with bespin-ui
+## Archived
+
+**This repo is no longer active.** Apache+wsgi build has moved into  [bespin-api](https://github.com/Duke-GCB/bespin-api/tree/master/apache-docker).
 
 # Usage
 
